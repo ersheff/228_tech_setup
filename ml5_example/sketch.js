@@ -5,6 +5,7 @@ let faceOptions = { maxFaces: 1, refineLandmarks: false, flipped: false };
 let faces = [];
 
 let handPose;
+let handOptions = { maxHands: 2 };
 let hands = [];
 
 async function setup() {
@@ -16,7 +17,7 @@ async function setup() {
   faceMesh = await ml5.faceMesh(faceOptions);
   faceMesh.detectStart(video, (results) => (faces = results));
 
-  handPose = await ml5.handPose();
+  handPose = await ml5.handPose(handOptions);
   handPose.detectStart(video, (results) => (hands = results));
 }
 
@@ -42,10 +43,5 @@ function draw() {
         circle(keypoint.x, keypoint.y, 10);
       }
     }
-    testFunc();
   }
-}
-
-function testFunc() {
-  console.log("test");
 }

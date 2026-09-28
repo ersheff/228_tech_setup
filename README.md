@@ -41,9 +41,19 @@ Follow [these instructions](https://docs.google.com/document/d/1iRAMGNryvLlIWCgp
 
 ## Examples
 
-There is currently a working ml5-based example in this folder. A MediaPipe-only example will be available soon.
+There are working examples for both **MediaPipe** and **ml5.js** in this folder. They are just intended to get you started with all of the necessary imports and setup. What you do with the data is up to you!
 
-To run either example from within **Zed**:
+## MediaPipe Example
+
+The **MediaPipe** example _does not_ provide an overlay on the video to visualize landmarks. Instead, it reads a selection of values from the results and displays them as text in the browser.
+
+Additionally, due to some issues with the **LiveServer** extension in **Zed**, you will need to launch this example either using the **LiveServer** extension in **VS Code** or using the built-in **Python** web server in **Zed**.
+
+### ml5.js Example
+
+The **ml5.js** example provides an overlay on the video to visualize all face and hand landmarks. 
+
+To run the **ml5.js** example from within **Zed**:
 - Open the `index.html` file
 - Press **command .** (macOS) or **control .** (Windows) to bring up **Code Actions**. You will likely only see "Open in Browser."
 - Select "Open in Browser" to launch the page in your default browser.

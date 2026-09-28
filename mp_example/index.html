@@ -7,7 +7,33 @@
     </head>
     <body>
         <video id="video" width="640" height="480" autoplay></video>
-        <canvas id="canvas" width="640" height="480"></canvas>
+
+        <h2>Sample face markers</h2>
+        <h3>0 (top lip) and 17 (bottom lip), y values only</h3>
+        <p id="top-lip"></p>
+        <p id="bottom-lip"></p>
+        <p>
+            Find map
+            <a
+                href="https://developers.google.com/edge/mediapipe/solutions/vision/face_landmarker"
+                target="_blank"
+                >here</a
+            >.
+        </p>
+
+        <h2>Sample hand markers (one hand only)</h2>
+        <h3>4 (thumb tip) and 8 (index tip), x and y values only</h3>
+        <p id="thumb-tip"></p>
+        <p id="index-tip"></p>
+        <p>
+            Find map
+            <a
+                href="https://developers.google.com/edge/mediapipe/solutions/vision/hand_landmarker"
+                target="_blank"
+                >here</a
+            >.
+        </p>
+
         <script type="module" src="script.js"></script>
     </body>
 </html>
