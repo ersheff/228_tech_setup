@@ -10,6 +10,7 @@ import {
   FilesetResolver,
   FaceLandmarker,
   HandLandmarker,
+  GestureRecognizer
 } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision/vision_bundle.mjs";
 
 const vision = await FilesetResolver.forVisionTasks(
@@ -30,6 +31,14 @@ const handLandmarker = await HandLandmarker.createFromOptions(vision, {
   },
   runningMode: "VIDEO",
   numHands: 1,
+});
+
+const gestureRecognizer = await GestureRecognizer.createFromOptions(vision, {
+  baseOptions: {
+    modelAssetPath: "./models/gesture_recognizer.task"
+  },
+  runningMode: "VIDEO",
+  numHands: 1
 });
 
 const video = document.getElementById("video");
@@ -64,8 +73,13 @@ function renderLoop() {
       video,
       timeStamp
     );
+    const gestureRecognizerResults = gestureRecognizer.recognizeForVideo(
+      video,
+      timeStamp
+    );
     processFace(faceLandmarkerResults);
     processHands(handLandmarkerResults);
+    processGesture(gestureRecognizerResults);
     lastVideoTime = video.currentTime;
   }
   requestAnimationFrame(renderLoop);
@@ -74,8 +88,8 @@ function renderLoop() {
 function processFace(results) {
   if (results.faceLandmarks.length > 0) {
     const face = results.faceLandmarks[0];
-    const topLip = face[0];
-    const bottomLip = face[17];
+    const topLip = face[468];
+    const bottomLip = face[473];
     document.getElementById("top-lip").textContent = `0: ${topLip.y}`;
     document.getElementById("bottom-lip").textContent = `17: ${bottomLip.y}`;
   }
@@ -90,6 +104,14 @@ function processHands(results) {
       `4: ${thumbTip.x}, ${thumbTip.y}`;
     document.getElementById("index-tip").textContent =
       `8: ${indexTip.x}, ${indexTip.y}`;
+  }
+}
+
+function processGesture(results) {
+  if (results.gestures.length > 0) {
+    const gesture = results.gestures[0][0];
+    const gestureType = gesture.categoryName;
+    document.getElementById("gesture-type").textContent = gestureType;
   }
 }
 
